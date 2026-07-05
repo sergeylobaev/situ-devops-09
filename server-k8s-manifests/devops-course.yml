@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: devops-course
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-course
+  labels:
+    app: devops-course
+    release-date: "RELEASE-DATE"
+  namespace: devops-course
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devops-course
+  template:
+    metadata:
+      labels:
+        app: devops-course
+        svc: frontend
+        release-date: "RELEASE-DATE"
+    spec:
+      containers:
+        - name: devops-course-server
+          image: sergeylobaev/devops-course:latest
+          # пока образ ещё не опубликован в Docker Hub, используем imagePullPolicy: IfNotPresent
+          # после первой публикации образа меняем на Always
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-devops
+  labels:
+    app: devops-course
+  namespace: devops-course
+spec:
+  type: LoadBalancer
+  selector:
+    app: devops-course
+    svc: frontend
+  ports:
+    - port: 12345
+      targetPort: 8000
+  # внешний IP кластера (IP хоста minikube)
+  externalIPs:
+    - 10.0.2.15
