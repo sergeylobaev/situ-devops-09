@@ -31,7 +31,7 @@
 
 ## CD: сборка и публикация образа в Docker Hub
 
-https://hub.docker.com/repository/docker/sergeylobaev/devops-course/general
+https://hub.docker.com/r/sergeylobaev/devops-course
 
 <img width="2388" height="1138" alt="image" src="https://github.com/user-attachments/assets/c870a1c0-e28e-4110-819c-338c41d50023" />
 <img width="2372" height="1044" alt="image" src="https://github.com/user-attachments/assets/df4d6edf-1eab-42b9-8867-267cfc19c42f" />
